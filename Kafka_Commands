@@ -1,0 +1,28 @@
+
+To start Kafka cluster:
+-----------------------
+./bin/kafka-server-start.sh config/server.properties &
+
+To stop Kafka Cluster:
+---------------------
+
+
+To alter number of partition in the existing kafka topic:
+---------------------------------------------------------
+./bin/kafka-topics.sh --alter --zookeeper node2:2181 --topic etisalatAsyncWriter --partitions 3
+
+Consume kafka topic record from the beginning:
+----------------------------------------------
+./bin/kafka-console-consumer.sh --bootstrap-server node1:9092 --topic etisalat --from-beginning
+
+To describe the topic details with partions:
+---------------------------------------------
+./bin/kafka-topics.sh --describe --zookeeper node1:2181 --topic etisalatAsyncWriter
+
+To check number of offset present in kafka topic:
+-------------------------------------------------
+./bin/kafka-run-class.sh kafka.tools.GetOffsetShell --broker-list node1:9092,node2:9093,node3:9094 --topic etisalat --time -1
+
+To describe the cosumer group:
+------------------------------
+./bin/kafka-consumer-groups.sh --bootstrap-server node1:9092,node2:9092,node3:9092 --describe --group  etisalat_batch_writer
